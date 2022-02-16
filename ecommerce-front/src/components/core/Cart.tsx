@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { CartItem, getCart } from '../../helpers/cart'
 import Layout from './Layout'
-import { Table, Row, Col } from 'antd'
+import { Row, Col, Input, Divider } from 'antd'
 import CartItemFc from './CartItemFc'
+import TotalPrice from './TotalPrice'
+import Pay from './Pay'
 
 const Cart = () => {
     const [cart, setCart] = useState<CartItem[]>([])
+    const [address, setAddress] = useState<string>('')
+    const [totalPrice, setTotalPrice] = useState<number>(0)
 
     useEffect(() => {
         setCart(getCart())
@@ -24,11 +28,10 @@ const Cart = () => {
                 </tr>
             </thead>
             <tbody className='ant-table-tbody'>
-                {cart.map(item => <CartItemFc product={item} key={item._id} />)}
+                {cart.map(item => <CartItemFc product={item} key={item._id} setCart={setCart} />)}
             </tbody>
         </table>
     )
-
 
     return (
         <Layout title='Cart' subTitle={`I'm yours`}>
@@ -36,7 +39,21 @@ const Cart = () => {
                 <Col span={16}>
                     {showCart()}
                 </Col>
-                <Col span={8}></Col>
+                <Col span={8}>
+                    <Row>
+                        <Input placeholder='input address' value={address} onChange={(event: ChangeEvent<HTMLInputElement>) => setAddress(event.target.value)} />
+                    </Row>
+
+                    <Divider />
+
+                    <Row>
+                        <TotalPrice cart={cart} setTotalPrice={setTotalPrice} />
+                    </Row>
+
+                    <Row>
+                        <Pay />
+                    </Row>
+                </Col>
             </Row>
         </Layout>
     )

@@ -28,7 +28,7 @@ const Home = () => {
       <Row>
         {
           createdAt.products.map((item) => (
-            <Col span={6}>
+            <Col span={6} key={item._id}>
               <ProductItem product={item} />
             </Col>
           ))
