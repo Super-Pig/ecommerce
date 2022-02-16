@@ -5,6 +5,9 @@ import { Typography } from 'antd'
 import { Product } from '../../store/models/product'
 import { API } from '../../config'
 import moment from 'moment'
+import { addItem } from '../../helpers/cart'
+import { useDispatch } from 'react-redux'
+import { push } from 'connected-react-router'
 
 interface Props {
     product: Product
@@ -13,6 +16,14 @@ interface Props {
 }
 
 export const ProductItem: FC<Props> = ({ product, showViewProduct = true, showCartButton = true }) => {
+    const dispatch = useDispatch()
+
+    const addToCart = () => {
+        addItem(product, () => {
+            dispatch(push('/cart'))
+        })
+    }
+
     const showButtons = () => {
         let buttonArray = []
 
@@ -21,7 +32,7 @@ export const ProductItem: FC<Props> = ({ product, showViewProduct = true, showCa
         }
 
         if (showCartButton) {
-            buttonArray.push(<Button type='link'><Link to=''>Add</Link></Button>)
+            buttonArray.push(<Button type='link' onClick={addToCart}>Add</Button>)
         }
 
         return buttonArray
