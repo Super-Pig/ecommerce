@@ -12,6 +12,7 @@ import Product from './components/core/Product'
 import Shop from './components/core/Shop'
 import Signin from './components/core/Signin'
 import Signup from './components/core/Signup'
+import Success from './components/core/Success'
 
 const Routes = () => {
     return (
@@ -27,6 +28,7 @@ const Routes = () => {
                 <AdminRoute path="/admin/create/product" component={AddProduct} />
                 <Route path="/product/:productId" component={Product} />
                 <Route path="/cart" component={Cart} />
+                <Route path="/paysuccess" component={Success} />
              </Switch>
         </HashRouter>
     )

@@ -51,7 +51,7 @@ const Cart = () => {
                     </Row>
 
                     <Row>
-                        <Pay />
+                        <Pay totalPrice={totalPrice} address={address} cart={cart} />
                     </Row>
                 </Col>
             </Row>
