@@ -84,10 +84,6 @@
   border-bottom: 1px solid #f0f0f0;
 }
 
-.checkBoxFilter .ant-checkbox-group-item::after {
-  display: block;
-}
-
 .ant-image-img {
   width: auto;
   max-width: 100%;

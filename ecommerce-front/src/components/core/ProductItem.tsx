@@ -8,35 +8,48 @@ import moment from 'moment'
 
 interface Props {
     product: Product
+    showViewProduct?: boolean
+    showCartButton?: boolean
 }
 
-export const ProductItem: FC<Props> = ({product}) => {
+export const ProductItem: FC<Props> = ({ product, showViewProduct = true, showCartButton = true }) => {
+    const showButtons = () => {
+        let buttonArray = []
+
+        if (showViewProduct) {
+            buttonArray.push(<Button type='link'><Link to={`/product/${product._id}`}>Detail</Link></Button>);
+        }
+
+        if (showCartButton) {
+            buttonArray.push(<Button type='link'><Link to=''>Add</Link></Button>)
+        }
+
+        return buttonArray
+    }
+
     return (
         <Card
             cover={
                 <Image src={`${API}/product/photo/${product._id}`} alt={product.name} />
             }
-            actions={[
-                <Button type='link'><Link to=''>Detail</Link></Button>,
-                <Button type='link'><Link to=''>Add</Link></Button>
-            ]}
+            actions={showButtons()}
         >
             <Typography.Title level={5}>{product.name}</Typography.Title>
             <Typography.Paragraph ellipsis={{ rows: 2 }}>{product.description}</Typography.Paragraph>
             <Row>
                 <Col span={12}>
-                    {product.sold}
+                    sold: {product.sold}
                 </Col>
                 <Col span={12} style={{ textAlign: 'right' }}>
-                    {product.price}
+                    price: {product.price}
                 </Col>
             </Row>
             <Row>
                 <Col span={12}>
-                    {moment(product.createdAt).format('YYYY-MM-DD HH:mm')}
+                    time: {moment(product.createdAt).format('YYYY-MM-DD HH:mm')}
                 </Col>
                 <Col span={12} style={{ textAlign: 'right' }}>
-                    {product.category.name}
+                    category: {product.category.name}
                 </Col>
             </Row>
         </Card>

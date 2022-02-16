@@ -1,4 +1,4 @@
-import { FilterProductsSuccessAction, FILTER_PRODUCT, FILTER_PRODUCT_SUCCESS, GET_PRODUCT, GET_PRODUCT_SUCCESS, ProductUnionType, SearchProductAction, SearchProductSuccessAction, SEARCH_PRODUCT, SEARCH_PRODUCT_SUCCESS } from "../actions/product.action";
+import { FILTER_PRODUCT, FILTER_PRODUCT_SUCCESS, GET_PRODUCT, GET_PRODUCT_BY_ID, GET_PRODUCT_BY_ID_SUCCESS, GET_PRODUCT_SUCCESS, ProductUnionType, SearchProductAction, SearchProductSuccessAction, SEARCH_PRODUCT, SEARCH_PRODUCT_SUCCESS } from "../actions/product.action";
 import { Product } from "../models/product";
 
 export interface ProductState {
@@ -20,6 +20,11 @@ export interface ProductState {
             size: number
             data: Product[]
         }
+    },
+    product: {
+        loaded: boolean
+        success: boolean
+        result: Product
     }
 }
 
@@ -41,6 +46,25 @@ const initialState: ProductState = {
         result: {
             size: 0,
             data: []
+        }
+    },
+    product: {
+        loaded: false,
+        success: false,
+        result: {
+            _id: '',
+            name: '',
+            price: 0,
+            description: '',
+            category: {
+                _id: '',
+                name: ''
+            },
+            quantity: 0,
+            sold: 0,
+            photo: new FormData(),
+            shipping: false,
+            createdAt: '',
         }
     }
 }
@@ -68,7 +92,7 @@ export default function productReducer(state: ProductState = initialState, actio
         case SEARCH_PRODUCT_SUCCESS:
             return {
                 ...state,
-                search: (action as SearchProductSuccessAction).products
+                search: action.products
             }
         case FILTER_PRODUCT:
             return {
@@ -83,8 +107,6 @@ export default function productReducer(state: ProductState = initialState, actio
                 }
             }
         case FILTER_PRODUCT_SUCCESS:
-            action = action as FilterProductsSuccessAction
-
             let data: Product[] = []
 
             data = action.skip === 0 ? action.payload.data : [...state.filter.result.data, ...action.payload.data]
@@ -98,6 +120,26 @@ export default function productReducer(state: ProductState = initialState, actio
                         size: action.payload.size,
                         data
                     }
+                }
+            }
+
+        case GET_PRODUCT_BY_ID:
+            return {
+                ...state,
+                product: {
+                    ...state.product,
+                    loaded: false,
+                    success: false
+                }
+            }
+
+        case GET_PRODUCT_BY_ID_SUCCESS:
+            return {
+                ...state,
+                product: {
+                    loaded: true,
+                    success: true,
+                    result: action.payload
                 }
             }
         default:

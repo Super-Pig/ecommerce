@@ -6,6 +6,8 @@ export const SEARCH_PRODUCT = 'SEARCH_PRODUCT'
 export const SEARCH_PRODUCT_SUCCESS = 'SEARCH_PRODUCT_SUCCESS'
 export const FILTER_PRODUCT = 'FILTER_PRODUCT'
 export const FILTER_PRODUCT_SUCCESS = 'FILTER_PRODUCT_SUCCESS'
+export const GET_PRODUCT_BY_ID = 'GET_PRODUCT_BY_ID'
+export const GET_PRODUCT_BY_ID_SUCCESS = 'GET_PRODUCT_BY_ID_SUCCESS'
 
 export interface FilterPayload {
     order?: string
@@ -58,6 +60,18 @@ export interface FilterProductsSuccessAction {
     skip: number
 }
 
+export interface GetProductByIdAction {
+    type: typeof GET_PRODUCT_BY_ID,
+    payload: {
+        productId: string
+    }
+}
+
+export interface GetProductByIdSuccessAction {
+    type: typeof GET_PRODUCT_BY_ID_SUCCESS,
+    payload: Product
+}
+
 export const getProduct = (sortBy: string,
     order: string = 'desc',
     limit: number = 5): GetProductAction => ({
@@ -100,6 +114,18 @@ export const filterProductSuccess = (payload: {
     skip
 })
 
+export const getProductById = (payload: {
+    productId: string
+}): GetProductByIdAction => ({
+    type: GET_PRODUCT_BY_ID,
+    payload
+})
+
+export const getProductByIdSuccess = (payload: Product): GetProductByIdSuccessAction => ({
+    type: GET_PRODUCT_BY_ID_SUCCESS,
+    payload
+})
+
 export type ProductUnionType =
     GetProductAction
     | GetProductSuccessAction
@@ -107,3 +133,5 @@ export type ProductUnionType =
     | SearchProductSuccessAction
     | FilterProductsAction
     | FilterProductsSuccessAction
+    | GetProductByIdAction
+    | GetProductByIdSuccessAction
