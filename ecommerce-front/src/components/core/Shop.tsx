@@ -54,8 +54,6 @@ const Shop = () => {
   }
 
   const noData = () => {
-    console.log(product.filter.result.size)
-
     return <Row>
       {product.filter.result.size === 0 && <Empty />}
     </Row>

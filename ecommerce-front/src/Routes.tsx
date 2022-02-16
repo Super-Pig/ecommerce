@@ -5,6 +5,7 @@ import AddProduct from './components/admin/AddProduct'
 import AdminDashboard from './components/admin/AdminDashboard'
 import AdminRoute from './components/admin/AdminRoute'
 import Dashboard from './components/admin/Dashboard'
+import Orders from './components/admin/Orders'
 import PrivateRoute from './components/admin/PrivateRoute'
 import Cart from './components/core/Cart'
 import Home from './components/core/Home'
@@ -26,6 +27,7 @@ const Routes = () => {
                 <AdminRoute path="/admin/dashboard" component={AdminDashboard} />
                 <AdminRoute path="/admin/create/category" component={AddCategory} />
                 <AdminRoute path="/admin/create/product" component={AddProduct} />
+                <AdminRoute path="/admin/orders" component={Orders} />
                 <Route path="/product/:productId" component={Product} />
                 <Route path="/cart" component={Cart} />
                 <Route path="/paysuccess" component={Success} />

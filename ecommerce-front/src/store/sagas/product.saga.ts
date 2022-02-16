@@ -15,8 +15,6 @@ function* handleGetProduct({ sortBy, order, limit }: GetProductAction) {
 }
 
 function* handleSearchProduct({ payload: { search, category } }: SearchProductAction) {
-    console.log('handleSearchProduct')
-
     let response: AxiosResponse = yield axios.get<Product[]>(`${API}/products/search`, {
         params: {
             search,

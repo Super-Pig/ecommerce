@@ -25,7 +25,7 @@ function AdminDashboard() {
                 </Menu.Item>
                 <Menu.Item>
                     <OrderedListOutlined />
-                    <Link to=''>Orders</Link>
+                    <Link to='/admin/orders'>Orders</Link>
                 </Menu.Item>
             </Menu>
         </>

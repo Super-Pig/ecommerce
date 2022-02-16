@@ -39,8 +39,6 @@ const AddProduct = () => {
                 formData.set(attr, product[attr])
             }
 
-            console.log(file)
-
             if (typeof file !== 'undefined') {
                 formData.set('photo', file)
             }

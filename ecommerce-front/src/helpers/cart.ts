@@ -76,3 +76,15 @@ export const deleteItem = (productId: string) => {
 
     return cart
 }
+
+export const itemCount = () => {
+    let cart: CartItem[] = []
+
+    if (window !== undefined) {
+        if (localStorage.getItem('cart')) {
+            cart = JSON.parse(localStorage.getItem('cart')!)
+        }
+    }
+
+    return cart.length
+}
