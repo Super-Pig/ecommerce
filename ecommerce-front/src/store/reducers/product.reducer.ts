@@ -78,7 +78,7 @@ export default function productReducer(state: ProductState = initialState, actio
                     success: false,
                     result: {
                         size: 0,
-                        data: []
+                        data: state.filter.result.data
                     }
                 }
             }
@@ -102,5 +102,5 @@ export default function productReducer(state: ProductState = initialState, actio
             }
         default:
             return state
-    }
+    } 
 }
